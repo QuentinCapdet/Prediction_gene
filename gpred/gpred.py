@@ -8,6 +8,14 @@ from pathlib import Path
 from typing import List, Union, Optional
 import textwrap
 
+__author__ = "Quentin"
+__copyright__ = "Universite Paris Diderot"
+__credits__ = ["Quentin"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Quentin"
+__email__ = "quentin.capdet@gmail.com"
+__status__ = "Developpement"
 
 def isfile(path: str) -> Path:  # pragma: no cover
     """Check if path is an existing file.
@@ -149,7 +157,7 @@ def predict_genes(sequence: str, start_regex: Pattern, stop_regex: Pattern, shin
         if current_pos:
             stop = find_stop(stop_regex, sequence, current_pos)
             if stop:
-                gene = (stop - current_pos) >= min_gene_len #len(sequence)
+                gene = (stop - current_pos) >= min_gene_len
                 if gene == True:
                     gene = has_shine_dalgarno(shine_regex, sequence, current_pos, max_shine_dalgarno_distance)
                     if gene == True:
@@ -258,12 +266,9 @@ def main() -> None: # pragma: no cover
     genes = probable_genes + comp
 
 
-
     # Call to output functions
-    write_genes_pos(args.predicted_genes_file, genes)
+    write_genes_pos(args.predicted_genes_file, sorted(genes))
     write_genes(args.fasta_file, sequence, probable_genes, sequence_rc, probable_genes_comp)
-
-
 
 
 if __name__ == '__main__':
